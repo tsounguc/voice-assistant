@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:venus/pallete.dart';
 
+import 'feature_box.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -71,8 +73,35 @@ class HomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+          ),
+
+          // features list
+          const Column(
+            children: [
+              FeatureBox(
+                color: Pallete.firstSuggestionBoxColor,
+                headerText: 'ChatGPT',
+                descriptionText: 'A smarter way to stay organized and informed with ChatGPT',
+              ),
+              FeatureBox(
+                color: Pallete.secondSuggestionBoxColor,
+                headerText: 'Dall-E',
+                descriptionText: 'Get inspired and stay creative with your personal assistant powered by Dall-E',
+              ),
+              FeatureBox(
+                color: Pallete.thirdSuggestionBoxColor,
+                headerText: 'Smart Voice Assistant',
+                descriptionText:
+                    'Get the best of both worlds with a voice assistant powered by Dall-E and ChatGPT',
+              )
+            ],
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Pallete.firstSuggestionBoxColor,
+        onPressed: () {},
+        child: Icon(Icons.mic),
       ),
     );
   }
