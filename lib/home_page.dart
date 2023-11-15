@@ -154,12 +154,12 @@ class _HomePageState extends State<HomePage> {
         onPressed: () async {
           if (await speechToText.hasPermission && speechToText.isNotListening) {
             await startListening();
-            print("Start: $lastWords");
+            debugPrint("Start: $lastWords");
           } else if (speechToText.isListening) {
             await stopListening();
-            print("Stop: $lastWords");
+            debugPrint("Stop: $lastWords");
           } else {
-            print("Init");
+            debugPrint("Init");
             await initSpeechToText();
           }
         },
