@@ -105,62 +105,80 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // chat bubble
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              margin: const EdgeInsets.symmetric(horizontal: 40).copyWith(top: 30),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Pallete.borderColor,
+            Visibility(
+              visible: generatedImageUrl == null,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 40).copyWith(top: 30),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Pallete.borderColor,
+                  ),
+                  borderRadius: BorderRadius.circular(20).copyWith(topLeft: Radius.zero),
                 ),
-                borderRadius: BorderRadius.circular(20).copyWith(topLeft: Radius.zero),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
-                  generatedContent ?? "Good Morning, what task can I do for you?",
-                  style: TextStyle(
-                    fontFamily: 'Cera Pro',
-                    color: Pallete.mainFontColor,
-                    fontSize: generatedContent == null ? 25 : 80,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    generatedContent ?? "Good Morning, what task can I do for you?",
+                    style: TextStyle(
+                      fontFamily: 'Cera Pro',
+                      color: Pallete.mainFontColor,
+                      fontSize: generatedContent == null ? 25 : 80,
+                    ),
                   ),
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.only(top: 10, left: 22),
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                'Here are a few features',
-                style: TextStyle(
-                  fontFamily: 'Cera Pro',
-                  color: Pallete.mainFontColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            if (generatedImageUrl != null)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(generatedImageUrl!),
+                ),
+              ),
+            Visibility(
+              visible: generatedContent == null && generatedImageUrl == null,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.only(top: 10, left: 22),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'Here are a few features',
+                  style: TextStyle(
+                    fontFamily: 'Cera Pro',
+                    color: Pallete.mainFontColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
 
             // features list
-            const Column(
-              children: [
-                FeatureBox(
-                  color: Pallete.firstSuggestionBoxColor,
-                  headerText: 'ChatGPT',
-                  descriptionText: 'A smarter way to stay organized and informed with ChatGPT',
-                ),
-                FeatureBox(
-                  color: Pallete.secondSuggestionBoxColor,
-                  headerText: 'Dall-E',
-                  descriptionText: 'Get inspired and stay creative with your personal assistant powered by Dall-E',
-                ),
-                FeatureBox(
-                  color: Pallete.thirdSuggestionBoxColor,
-                  headerText: 'Smart Voice Assistant',
-                  descriptionText:
-                      'Get the best of both worlds with a voice assistant powered by Dall-E and ChatGPT',
-                )
-              ],
+            Visibility(
+              visible: generatedContent == null,
+              child: const Column(
+                children: [
+                  FeatureBox(
+                    color: Pallete.firstSuggestionBoxColor,
+                    headerText: 'ChatGPT',
+                    descriptionText: 'A smarter way to stay organized and informed with ChatGPT',
+                  ),
+                  FeatureBox(
+                    color: Pallete.secondSuggestionBoxColor,
+                    headerText: 'Dall-E',
+                    descriptionText:
+                        'Get inspired and stay creative with your personal assistant powered by Dall-E',
+                  ),
+                  FeatureBox(
+                    color: Pallete.thirdSuggestionBoxColor,
+                    headerText: 'Smart Voice Assistant',
+                    descriptionText:
+                        'Get the best of both worlds with a voice assistant powered by Dall-E and ChatGPT',
+                  )
+                ],
+              ),
             )
           ],
         ),
