@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
             await initSpeechToText();
           }
         },
-        child: const Icon(Icons.mic),
+        child: Icon(speechToText.isListening ? Icons.stop : Icons.mic),
       ),
     );
   }
